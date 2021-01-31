@@ -19,10 +19,18 @@ module.exports = {
             presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
-      }, {
+      },
+      {
         test: /\.(css)$/,
         use: ['style-loader', 'css-loader'],
-      }
+      },
+      {
+        test: /\.(mp4|png)$/,
+        exclude: /node_modules/,
+        use: [
+          'file-loader',
+        ],
+ }
     ],
   },
   devtool: 'eval-source-map',
