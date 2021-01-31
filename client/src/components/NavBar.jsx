@@ -20,13 +20,19 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  nav: {
+    flexGrow: 1,
+    position: 'fixed',
+    'background-color': '#3f51b5',
+    width: '100%',
+  },
 }));
 
 const NavBar = () => {
   const classes = useStyles();
 
   return (
-    <AppBar position='static'>
+    <AppBar className={classes.nav}>
       <Toolbar>
         <IconButton
           edge='start'
@@ -37,7 +43,7 @@ const NavBar = () => {
           <MenuIcon />
         </IconButton>
         <Typography variant='h6' className={classes.title}>
-          News
+          Life Choices
         </Typography>
         <Button color='inherit'>Login</Button>
       </Toolbar>
