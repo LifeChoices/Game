@@ -1,6 +1,5 @@
 import React from 'react';
-// import { makeStyles } from '@material-ui/core';
-// import { MenuIcon, AddIcon, SearchIcon, MoreIcon } from '@material-ui/icons';
+
 import {
   makeStyles,
   AppBar,
@@ -10,7 +9,6 @@ import {
   IconButton,
 } from '@material-ui/core';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
-import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
   bottomFooter: {
