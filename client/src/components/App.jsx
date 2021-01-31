@@ -8,7 +8,6 @@ const App = () => {
   return (
     <div>
       <NavBar />
-      <h1>We in react</h1>
       <Splash />
       <Footer />
     </div>

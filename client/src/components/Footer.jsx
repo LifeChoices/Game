@@ -13,6 +13,8 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 const useStyles = makeStyles((theme) => ({
   bottomFooter: {
     bottom: 0,
+    height: window.innerHeight * 0.04,
+
     flexGrow: 1,
     position: 'fixed',
     'background-color': '#3f51b5',
