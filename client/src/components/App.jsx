@@ -11,8 +11,10 @@ const App = () => {
     <Router>
       <div>
         <NavBar />
-        <Route path='/splash' component={Splash} />
-        <Route path='/' exact component={Portfolio} />
+        <Switch>
+          <Route component={Splash} path='/' exact />
+          <Route path='/portfolio' component={Portfolio} />
+        </Switch>
         <Footer />
       </div>
     </Router>

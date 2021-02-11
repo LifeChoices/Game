@@ -13,9 +13,18 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: '8%',
+    marginTop: '4%',
     height: window.innerHeight * 0.9,
     flexGrow: 1,
+    backgroundColor: 'DarkSeaGreen',
+  },
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+  grid: {
+    marginTop: '4%',
   },
 }));
 
@@ -24,7 +33,24 @@ const Portfolio = () => {
 
   return (
     <div className={classes.root}>
-      <p> Portfolio Page </p>
+      <Grid
+        className={classes.grid}
+        container
+        spacing={2}
+        justify='space-evenly'
+      >
+        <Grid item xs={5}>
+          <Paper className={classes.paper}>Possessions / Skills </Paper>
+        </Grid>
+        <Grid item xs={5}>
+          <Grid>
+            <Paper className={classes.paper}>Avatar Picture </Paper>
+          </Grid>
+          <Grid>
+            <Paper className={classes.paper}>Personal Information </Paper>
+          </Grid>
+        </Grid>
+      </Grid>
     </div>
   );
 };

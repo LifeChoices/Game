@@ -30,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
     'background-color': '#3f51b5',
     width: '100%',
   },
+  links: {
+    textDecoration: 'none',
+    color: 'white',
+  },
 }));
 
 const NavBar = () => {
@@ -41,10 +45,15 @@ const NavBar = () => {
         <Typography variant='h6' className={classes.title}>
           Life Choices
         </Typography>
-        <Button color='inherit' path='/portfolio'>
-          Portfolio
-        </Button>
-        <Button color='inherit'>Login</Button>
+        <Link to='/' className={classes.links}>
+          <Button color='inherit'>Splash</Button>
+        </Link>
+        <Link to='/portfolio' className={classes.links}>
+          <Button color='inherit'>Portfolio</Button>
+        </Link>
+        <Link className={classes.links}>
+          <Button color='inherit'>Login</Button>
+        </Link>
       </Toolbar>
     </AppBar>
   );
