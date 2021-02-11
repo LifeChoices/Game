@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router-dom';
 import {
   makeStyles,
   AppBar,
@@ -8,6 +9,8 @@ import {
   Button,
   IconButton,
 } from '@material-ui/core';
+import Tab from '@material-ui/core/Tab';
+import Portfolio from './Portfolio';
 import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
     'background-color': '#3f51b5',
     width: '100%',
   },
+  links: {
+    textDecoration: 'none',
+    color: 'white',
+  },
 }));
 
 const NavBar = () => {
@@ -35,18 +42,18 @@ const NavBar = () => {
   return (
     <AppBar className={classes.nav}>
       <Toolbar>
-        <IconButton
-          edge='start'
-          className={classes.menuButton}
-          color='inherit'
-          aria-label='menu'
-        >
-          <MenuIcon />
-        </IconButton>
         <Typography variant='h6' className={classes.title}>
           Life Choices
         </Typography>
-        <Button color='inherit'>Login</Button>
+        <Link to='/' className={classes.links}>
+          <Button color='inherit'>Splash</Button>
+        </Link>
+        <Link to='/portfolio' className={classes.links}>
+          <Button color='inherit'>Portfolio</Button>
+        </Link>
+        <Link className={classes.links}>
+          <Button color='inherit'>Login</Button>
+        </Link>
       </Toolbar>
     </AppBar>
   );
