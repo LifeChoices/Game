@@ -1,0 +1,6 @@
+{
+  "editor.autoClosingBrackets": "always",
+  "files.autoSave": "onFocusChange",
+  "editor.formatOnSave": true,
+  "files.autoSaveDelay": 0
+}
