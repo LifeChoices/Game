@@ -5,10 +5,10 @@ const express = require('express');
 // require package that service static front end files ./client/dist
 const path = require('path');
 // import the database connection function
-const run = require('./dbConfig')
+const { connAndSeed } = require('./dbConfig')
 
-// invoke oracle connection function
-run();
+// invoke oracle connection function and creat schema
+connAndSeed();
 
 // set the port number for the application server
 const port = 3000
