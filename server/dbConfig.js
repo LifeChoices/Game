@@ -2,11 +2,11 @@
 const oracledb = require('oracledb');
 
 // variable with database connection credentials
-let config = {
-  user: process.env.DB_USER_NAME,
-  password: process.env.DB_PASSWORD,
-  connectString: 'localhost:1521/orclpdb'
-}
+// let config = {
+//   user: process.env.DB_USER_NAME,
+//   password: process.env.DB_PASSWORD,
+//   connectString: 'localhost:1521/orclpdb'
+// }
 
 // create function to seed database with initial application schema
 const connAndSeed = async() =>{
@@ -39,7 +39,7 @@ const connAndSeed = async() =>{
       required_experience number  -- set default limit
       )
     CREATE TABLE Players(
-      player_id NUMBER primary key,
+      player_id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) PRIMARY KEY,
       first_name VARCHAR2(64),
       last_name VARCHAR2(64),
       email VARCHAR2(128),

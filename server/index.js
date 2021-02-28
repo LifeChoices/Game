@@ -4,11 +4,16 @@ require('dotenv').config();
 const express = require('express');
 // require package that service static front end files ./client/dist
 const path = require('path');
-// import the database connection function
-const { connAndSeed } = require('./dbConfig')
+// import dbConnection file
+require('./dbConnection');
+// // import the database connection function
+// const { connAndSeed } = require('./dbConfig')
+// // import the database DML functions
+// const { dummyData } = require('./dbFunctions')
 
-// invoke oracle connection function and creat schema
-connAndSeed();
+// // invoke oracle connection function and creat schema
+// connAndSeed();
+// dummyData();
 
 // set the port number for the application server
 const port = 3000
