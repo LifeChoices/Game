@@ -1,46 +1,54 @@
 // import oracledb package to connect to oracle database instance
 const oracledb = require('oracledb');
 
-// variable with database connection credentials
+//import dbSeed file
+const { dbSeed } = require('./dbSeed')
+
+// database connection credentials
 let config = {
   user: process.env.DB_USER_NAME,
   password: process.env.DB_PASSWORD,
-  connectString: 'localhost:1521/orclpdb'
+  connectString: 'localhost:1521/orclpdb',
 };
 
-// Function creates connection pool and establish db connection for app
+// Function - creates connection pool, establish connection to db, creates initial schema
 const dbConnect = async() => {
-
-  // create connection pool and connection to oracle database
-  oracledb.createPool( config, ( error, pool ) => {
-
-    if( error ){
-      console.error( error.message + "\n" );
-    }
-
-    pool.getConnection( ( error, connection )=> {
-
-      if( error ){
-        console.error( error.message + "\n" )
-      }
-
-      console.log( "ORACLE Pool Water is warm!")
-
-      connection.close( error => {
-        if( error ){
-          console.error( error.message + "\n" );
-
-        }
-      })
-
-    } )
+  try {
+    //create variable set to configuration of oracle connection pool
+    await oracledb.createPool({
+      poolAlias: 'lifeChoices',
+      user: config.user,
+      password: config.password,
+      connectString: config.connectString
+  });
+    //success pool message
+    console.log( "ORACLE Pool Open")
+    // console.log(pool.poolAlias)
+    // use pool promise to establish connection pool
+    await dbSeed();
+    // log successful connection message
+    console.log( "Database Seeded")
+  } catch (error) {
+    // log any connection errors
+    console.error( error.message + "\n" );
   }
-  );
+
+};
+
+// export oracle db connection function
+module.exports = {
+  dbConnect
 };
 
 
-dbConnect();
+/*
 
-// module.exports = {
-//   connAndSeed
-// };
+The most helpful connection information was found at the links below:
+
+- video explanation was great for explaining the reasoning behind connection pooling
+--> https://www.youtube.com/watch?v=aTht9Va-CoE
+
+- article gave multiple exams of connection types
+--> https://blogs.oracle.com/opal/node-oracledb-connection-samples-proxies-and-external-authentication
+
+*/
