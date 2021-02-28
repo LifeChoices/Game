@@ -1,6 +1,7 @@
 // import oracledb package to connect to oracle database instance
 const oracledb = require('oracledb');
 
+
 // import database connection credentials
 let config = {
   user: process.env.DB_USER_NAME,
@@ -9,7 +10,7 @@ let config = {
 }
 
 
-// dummy data function
+// Function - adds dummy data to db tables
 const dummyData = async() => {
 
   try {
@@ -18,16 +19,16 @@ const dummyData = async() => {
     let conn = await oracledb.getConnection(config)
 
     // SQL INSERT statement
-    let sql = `INSERT INTO Players ( first_name, last_name, email, pass_word, character_id, player_alias )
-    VALUES ( :a, :b, :c, :d, :e, :f )`;
+    let sql = `INSERT INTO Players ( email, pass_word, character_id, player_alias )
+    VALUES ( :a, :b, :c, :d )`;
 
     // Values to be INSERTED into table
     let binds = [
-      { a:'James', b:'Thomas', c:'jt@gmail.com', d:'jt123', e:null, f:null },
-      { a:'Kayla', b:'Turner', c:'kt@gmail.com', d:'kt123', e:null, f:null },
-      { a:'Lorie', b:'Zepeda', c:'lz@gmail.com', d:'zp123', e:null, f:null },
-      { a:'King' , b:'Leo',    c:'kl@gmail.com', d:'kl123', e:null, f:null },
-      { a:'Queen', b:'Rabbit', c:'qr@gmail.com', d:'qtr23', e:null, f:null },
+      { a:'jt@gmail.com', b:'jt123', c:null, d:null },
+      { a:'kt@gmail.com', b:'kt123', c:null, d:null },
+      { a:'lz@gmail.com', b:'zp123', c:null, d:null },
+      { a:'kl@gmail.com', b:'kl123', c:null, d:null },
+      { a:'qr@gmail.com', b:'qtr23', c:null, d:null },
     ];
 
     // database options for values and return messages
@@ -41,6 +42,7 @@ const dummyData = async() => {
       const result = await conn.executeMany(sql, binds, options);
 
       // log the results
+      console.log('*** Dummy Data Entered ***')
       console.log(result);
 
     } catch (error) {
@@ -54,14 +56,17 @@ const dummyData = async() => {
 
 
 // addPlayer - add new player to database
-const addPlayer = async(first_name, last_name, email, pass_word, character_id, player_alias) =>{
+const addPlayer = async( email, pass_word ) =>{
 
 }
 
 // findPlayer - locate existing  player in database
-const findPlayer = async(first_name, last_name, email, pass_word, character_id, player_alias) =>{
-  
+const findPlayer = async( email, pass_word ) =>{
+
 }
+
+
+// dummyData();
 module.exports = {
   dummyData
 };

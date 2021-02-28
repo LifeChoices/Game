@@ -10,6 +10,9 @@ const path = require('path');
 // import dbConnection file
 const { dbConnect } = require('./dbConnection');
 
+// require DbFunctions file
+const { dummyData } = require('./dbFunctions');
+
 // set the port number for the application server
 const port = 3000
 
@@ -26,4 +29,7 @@ app.use(express.static(frontEnd))
 app.listen(port, () => console.info(`http://localhost:${port}`))
 
 // invoke oracle connection function and creat schema
-dbConnect();
+// dbConnect();
+
+//test db functions
+// dummyData();

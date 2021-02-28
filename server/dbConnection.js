@@ -11,6 +11,7 @@ let config = {
   connectString: 'localhost:1521/orclpdb',
 };
 
+
 // Function - creates connection pool, establish connection to db, creates initial schema
 const dbConnect = async() => {
   try {
@@ -23,11 +24,10 @@ const dbConnect = async() => {
   });
     //success pool message
     console.log( "ORACLE Pool Open")
-    // console.log(pool.poolAlias)
-    // use pool promise to establish connection pool
+
+    // use dbSeed function to initialize Schema
     await dbSeed();
-    // log successful connection message
-    console.log( "Database Seeded")
+
   } catch (error) {
     // log any connection errors
     console.error( error.message + "\n" );
