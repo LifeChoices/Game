@@ -1,4 +1,5 @@
 // import oracledb package to connect to oracle database instance
+const e = require('express');
 const oracledb = require('oracledb');
 
 
@@ -56,19 +57,66 @@ const dummyData = async() => {
 
 
 // addPlayer - add new player to database
-const addPlayer = async( email, pass_word ) =>{
+const addPlayer = async( eMail, passWord ) =>{
 
-}
+  try {
+
+    // create new connection
+    let conn = await oracledb.getConnection(config);
+
+    //execute sql statement
+    let result = await conn.execute( `INSERT INTO Players ( email, pass_word ) VALUES (:0, :1)`, [ eMail, passWord ],{ autoCommit: true } );
+
+    // successful transaction message
+    console.log("Rows inserted " + "\n", result.rowsAffected);
+
+
+    } catch (error) {
+
+      // log any errors to console if connection fails
+      console.log(error.message + "\n")
+
+    }
+
+};
 
 // findPlayer - locate existing  player in database
-const findPlayer = async( email, pass_word ) =>{
+const findPlayer = async( eMail, passWord ) =>{
 
-}
+  try {
 
+    // create new connection
+    let conn = await oracledb.getConnection(config);
+
+    //execute sql statement
+    let result = await conn.execute( `SELECT player_id, character_id,player_alias FROM Players WHERE email= :0 AND PASS_WORD= :1`, [ eMail, passWord ],{ autoCommit: true }  );
+
+    // successful transaction message
+    // console.log( "*** Query Data***" + "\n", result.rows.forEach( row => {
+    //   console.log( row )
+    // }));
+
+    return result;
+
+    } catch (error) {
+
+      // log any errors to console if connection fails
+      console.log(error.message + "\n")
+
+    }
+
+};
+
+// addPlayer( 'Player@gmail.com', 'Player123' );
+findPlayer( 'test@gmail.com','test123' ).then( result =>{
+  console.log(result);
+} )
 
 // dummyData();
 module.exports = {
-  dummyData
+  dummyData,
+  addPlayer,
+  findPlayer
 };
 
 /*   Dummy Data RAW sql insert statements
