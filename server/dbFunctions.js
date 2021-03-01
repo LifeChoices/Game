@@ -1,4 +1,5 @@
 // import oracledb package to connect to oracle database instance
+const { Email } = require('@material-ui/icons');
 const e = require('express');
 const oracledb = require('oracledb');
 
@@ -12,6 +13,7 @@ let config = {
 
 
 // Function - adds dummy data to db tables
+// Object will be returned, table data in rows array of return object
 const dummyData = async() => {
 
   try {
@@ -43,8 +45,11 @@ const dummyData = async() => {
       const result = await conn.executeMany(sql, binds, options);
 
       // log the results
-      console.log('*** Dummy Data Entered ***')
-      console.log(result);
+      console.log('*** Dummy Data Entered ***', result.rows)
+      // console.log(result);
+
+      // return the queried data or results
+      return result;
 
     } catch (error) {
 
@@ -57,6 +62,7 @@ const dummyData = async() => {
 
 
 // addPlayer - add new player to database
+// Object will be returned, table data in rows array of return object
 const addPlayer = async( eMail, passWord ) =>{
 
   try {
@@ -68,7 +74,10 @@ const addPlayer = async( eMail, passWord ) =>{
     let result = await conn.execute( `INSERT INTO Players ( email, pass_word ) VALUES (:0, :1)`, [ eMail, passWord ],{ autoCommit: true } );
 
     // successful transaction message
-    console.log("Rows inserted " + "\n", result.rowsAffected);
+    // console.log("Rows inserted " + "\n", result.rowsAffected);
+
+    // return the queried data or results
+    return result;
 
 
     } catch (error) {
@@ -81,6 +90,7 @@ const addPlayer = async( eMail, passWord ) =>{
 };
 
 // findPlayer - locate existing  player in database
+// Object will be returned, table data in rows array of return object
 const findPlayer = async( eMail, passWord ) =>{
 
   try {
@@ -89,13 +99,10 @@ const findPlayer = async( eMail, passWord ) =>{
     let conn = await oracledb.getConnection(config);
 
     //execute sql statement
-    let result = await conn.execute( `SELECT player_id, character_id,player_alias FROM Players WHERE email= :0 AND PASS_WORD= :1`, [ eMail, passWord ],{ autoCommit: true }  );
+    let result = await conn.execute( `SELECT * FROM Players WHERE EMAIL='${eMail}' AND PASS_WORD='${passWord}'` );
 
     // successful transaction message
-    // console.log( "*** Query Data***" + "\n", result.rows.forEach( row => {
-    //   console.log( row )
-    // }));
-
+    // console.table( "*** Query Data***" + "\n", result.rows);
     return result;
 
     } catch (error) {
@@ -107,10 +114,6 @@ const findPlayer = async( eMail, passWord ) =>{
 
 };
 
-// addPlayer( 'Player@gmail.com', 'Player123' );
-findPlayer( 'test@gmail.com','test123' ).then( result =>{
-  console.log(result);
-} )
 
 // dummyData();
 module.exports = {
@@ -119,11 +122,5 @@ module.exports = {
   findPlayer
 };
 
-/*   Dummy Data RAW sql insert statements
-INSERT INTO Players VALUES ( 1, 'James', 'Thomas', 'jt@gmail.com', 'jt123', null, null   );
-INSERT INTO Players VALUES ( 2, 'Kayla', 'Turner', 'kt@gmail.com', 'kt123', null, null   );
-INSERT INTO Players VALUES ( 3, 'Lorie', 'Zepeda', 'lz@gmail.com', 'lz123', null, null   );
-INSERT INTO Players VALUES ( 4, 'King', 'Leo', 'kl@gmail.com', 'kl123', null, null   );
-INSERT INTO Players VALUES ( 5, 'Queen', 'Rabbit', 'qr@gmail.com', 'qr123', null, null   );
-*/
+
 

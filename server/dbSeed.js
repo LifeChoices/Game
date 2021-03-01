@@ -14,7 +14,7 @@ const dbSeed = async() =>{
     CREATE TABLE Characters (
       character_id number primary key,
       name varchar2(50),
-      alias varchar2(50) unique,
+      character_alias varchar2(50) unique,
       occupation varchar2(50),
       wallet number,
       experience number
@@ -34,10 +34,10 @@ const dbSeed = async() =>{
       )
     CREATE TABLE Players(
       player_id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) PRIMARY KEY,
-      email varchar2(100) unique,
+      e_mail varchar2(100) unique,
       pass_word varchar2(100),
       character_id NUMBER REFERENCES characters (character_id),
-      player_alias varchar2(100) REFERENCES characters (alias)
+      player_alias varchar2(100) REFERENCES characters (character_alias)
       )
     CREATE TABLE character_skills (
       skill_id number REFERENCES Skills (skill_id),

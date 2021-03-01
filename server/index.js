@@ -29,7 +29,7 @@ app.use(express.static(frontEnd))
 app.listen(port, () => console.info(`http://localhost:${port}`))
 
 // invoke oracle connection function and creat schema
-// dbConnect();
+dbConnect();
 
 //test db functions
 // dummyData();
