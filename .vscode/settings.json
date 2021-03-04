@@ -2,5 +2,6 @@
   "editor.autoClosingBrackets": "always",
   "files.autoSave": "onFocusChange",
   "editor.formatOnSave": true,
-  "files.autoSaveDelay": 0
+  "files.autoSaveDelay": 0,
+  "git.terminalAuthentication": false,
 }
